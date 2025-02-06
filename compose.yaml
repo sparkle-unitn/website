@@ -16,6 +16,14 @@ services:
   db:
     image: mariadb:10.1
     restart: always
+    environment:
+      MYSQL_DATABASE: sparkle
+      MYSQL_USER: sparkle
+      MYSQL_ROOT_PASSWORD: admin
+      MYSQL_PASSWORD: admin
+    volumes:
+      - ./db/init/:/docker-entrypoint-initdb.d
+      - ./db/data/:/var/lib/mysql
 
 # Optionally, define networks if you have more complex requirements
 # networks:
