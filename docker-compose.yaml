@@ -1,0 +1,24 @@
+name: sparkle-website
+
+services:
+  web:
+    build: ./web
+    container_name: wordpress
+    ports:
+      - "80:80"
+    volumes:
+      - ./web/src:/var/www/html
+
+  db:
+    image: mariadb:lts
+    container_name: mariadb
+    restart: always
+    ports:
+      - 3306:3306
+    environment:
+      MARIADB_DATABASE: ${DB}
+      MARIADB_USER: ${DB_USER}
+      MARIADB_PASSWORD: ${DB_PASSWORD}
+      MARIADB_ROOT_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - /db/data/:/var/lib/mysql
